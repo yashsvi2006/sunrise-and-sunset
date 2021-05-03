@@ -18,7 +18,7 @@ function setup(){
     var canvas = createCanvas(1200,700);
     engine = Engine.create();
     world = engine.world;
-    Engine.run(engine);
+    
 
 
 }
@@ -27,12 +27,19 @@ function draw(){
   if(bg){
       background(bg);
   }
-    // add condition to check if any background image is there to add
+    
 
 
     Engine.update(engine);
-
-    // write code to display time in correct format here
+    if(hour>=12){
+         text("Time : "+ hour%12 + " PM", 50,100);
+         }else if(hour==0){
+              text("Time : 12 AM",100,100); 
+            }
+        else{
+         text("Time : "+ hour%12 + " AM", 50,100);
+         }
+    
 
 
 }
@@ -43,7 +50,7 @@ async function getBackgroundImg(){
         var responseJSON = await response.json();
     
         var datetime = responseJSON.datetime;
-        var hour = datetime.slice(11,13);
+        hour =datetime.slice(11,13);
         
         if(hour>=04 && hour<=06){
             backgroundImg = "sunrise1.png";
@@ -51,35 +58,42 @@ async function getBackgroundImg(){
         else if (hour>=06 && hour<=08){
             backgroundImg = "sunrise2.png";
         }
-        else if(hour>=08 && hour<=09) {
+        else if(hour>=08 && hour<=11) {
             backgroundImg = "sunrise3.png";
-        }else if(hour>=09 && hour<=10) {
+        }else if(hour>=11 && hour<=13) {
             backgroundImg = "sunrise4.png";
         }
-        else if(hour>=10 && hour<=11) {
+        else if(hour>=13 && hour<=15) {
             backgroundImg = "sunrise5.png";
         }
-        else if(hour>=11 && hour<=12) {
+        else if(hour>=15 && hour<=17) {
             backgroundImg = "sunrise6.png";
         }
-        else if(hour>=22 && hour<=24) {
-            backgroundImg = "sunrise5.png";
+        else if(hour>=17 && hour<=18) {
+            backgroundImg = "sunset7.png";
+        }
+        else if(hour>=18 && hour<=20) {
+            backgroundImg = "sunset8.png";
+        }
+        else if(hour>=20 && hour<=23) {
+            backgroundImg = "sunset9.png";
+        }
+        else if(hour>=23 && hour<=0) {
+            backgroundImg = "sunset10.png";
+        }
+        else if(hour>=0 && hour<=03) {
+            backgroundImg = "sunset11.png";
+        }
+        else if(hour>=03 && hour<=06) {
+            backgroundImg = "sunset12.png";
         }
 
     
         bg = loadImage(backgroundImg);
-      //  console.log(backgroundImg);
+      
     }
-    // write code to fetch time from API
+    
 
-    //change the data in JSON format
-
-    // write code slice the datetime
-
-
-    // add conditions to change the background images from sunrise to sunset
-
-
-    //load the image in backgroundImg variable here
+    
 
 
